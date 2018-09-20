@@ -1,3 +1,10 @@
 <h1>This is places page!</h1>
 
-<%= places %>
+<% places.forEach(function(place){ %>
+    <div>
+        <h4><%= place.name%></h4>
+        <!--for img src attribute we use '<'%'%'>' inside quotes"", cause workable issue in such cases-->
+        <img src="<%= place.image %>" 
+    </div>
+    
+<% }); %>
