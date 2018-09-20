@@ -1,0 +1,23 @@
+{
+  "name": "myblog",
+  "version": "1.0.0",
+  "description": "my blog about travels",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/desert1988/MyBlog.git"
+  },
+  "author": "desert (wetlsd)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/desert1988/MyBlog/issues"
+  },
+  "homepage": "https://github.com/desert1988/MyBlog#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}
