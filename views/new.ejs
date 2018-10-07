@@ -1,0 +1,12 @@
+<% include partials/header %>
+<h1>Add new place for Journey!</h1>
+
+<form action="/places" method="POST">
+    <input type="text" name="name" placeholder="title name">
+    <input type="text" name="image" placeholder="image url">
+    <button>Add place</button>
+</form>
+
+<a href="/places">Back to Places</a>
+
+<% include partials/footer %>
