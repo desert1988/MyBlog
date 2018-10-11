@@ -1,15 +1,30 @@
 <% include partials/header %>
-<h1>This is places page!</h1>
+    <div class="container">
+        <div class="jumbotron">
+            <div class="container">
+                <h1>Welcome to Places!</h1>
+                <p>View our astound Places from all over the world and start yours Journey</p>
+                <p>
+                    <a class="btn btn-primary btn-lg" href="/places/new">Add Places</a>
+                </p>
+            </div>
+        </div>
 
-<a href="/places/new">Add place and start new Journey here!</a>
 
-<% places.forEach(function(place){ %>
-    <div>
-        <h4><%= place.name%></h4>
-        <!--for img src attribute we use '<'%'%'>' inside quotes"", cause workable issue in such cases-->
-        <img src="<%= place.image %>"> 
+    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% places.forEach(function(place){ %>
+            <div class="col col-lg-3 col-md-6">
+                <div class="img-thumbnail">
+                    <!--for img src attribute we use '<'%'%'>' inside quotes"", cause workable issue in such cases-->
+                    <img class="img-responsive" src="<%= place.image %>">
+                    <div class="caption">
+                        <h4><%= place.name%></h4>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
     </div>
-    
-<% }); %>
+ 
+    </div>
 
 <% include partials/footer %>

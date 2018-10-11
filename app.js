@@ -9,9 +9,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs"); 
 
 var places = [
-        {name: "Shenzhen", image: "https://lh5.googleusercontent.com/proxy/0vzAA5YhTvDRKpRzCpqg6Z-8ADu5YPWBWmcnJ8BNzK6e1J4vEMX_YZyWBHaDgcHpcjxVC5kGVfyTZ6U1MB1yfca3LBiuCFrEJhmJM5XgGbpEknulX2-hCorIT65pouqYmepqolEJq7Xt3wfJeJMIWDe7AYw=w586-h360-k-no"},
-        {name: "Hong Kong", image: "https://lh3.googleusercontent.com/proxy/CEnPeR0ju2MO9A-VVpoPVwetB6IA9-jFitb_UNoeD-m_sbbF-nKnVbVRqDo52ki-8SlxfUmS06XnXWfaG5I3AC4tniIARN_ABLmDj3Ytfbb_GeGne9f9OEDWT6ZF5yCb-__D2RHKt0OCkCgk9Tx3tvs4OoU=w542-h360-k-no"},
-        {name: "Guangzhou", image: "https://lh4.googleusercontent.com/proxy/uB0ABh39ihVDm3aHn8idJH0guxhpN51VDqhlyZryOMRQ4ImzcHdpteYIE0AhvM0QsG5Kz1sz2O9Jk5YuKDnDo0fWbsuqCH4op_0Rbx002Py2bZXxZuosl0528IAN2WalTQlEojTi1CH3Rj43I6rV0_FbOUQ=w541-h360-k-no"}
+        {name: "Shenzhen", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/View_east_along_Sungang_East_Road_from_Renmin_North_Road%2C_Shenzhen%2C_China.jpg/332px-View_east_along_Sungang_East_Road_from_Renmin_North_Road%2C_Shenzhen%2C_China.jpg"},
+        {name: "Hong Kong", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Hong_kong_bruce_lee_statue.jpg/220px-Hong_kong_bruce_lee_statue.jpg"},
+        {name: "Guangzhou", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Guangzhou_skyline.jpg/261px-Guangzhou_skyline.jpg"}
     ];
 
 app.get("/", function(req, res){
