@@ -7,14 +7,14 @@ const express = require("express"),
 mongoose.connect("mongodb://localhost/guide");
 
 app.use(bodyParser.urlencoded({extended: true}));
-
 //below is activation of "views" folder  with ".ejs" files inside, so from now you can rendering that files
 app.set("view engine", "ejs"); 
 
 //Schema setup for Mongo
 let placeSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String
 });
 
 //Model setup for Mongo
@@ -59,12 +59,13 @@ app.get("/places", function(req, res){
     // res.render("places", {places: places});
 });
 
-
+//Add new Place to DB
 app.post("/places", function(req, res){
     // get data and add to places Array
     let name = req.body.name,
         image = req.body.image,
-        newPlace = {name: name, image: image};
+        description = req.body.description,
+        newPlace = {name: name, image: image, description: description};
     //Create a new campground and save to guide DB
     Place.create(newPlace, function(err, placeCreated){
         if(err){
@@ -78,6 +79,19 @@ app.post("/places", function(req, res){
 
 app.get("/places/new", function(req, res) {
    res.render("new.ejs"); 
+});
+
+//shows more information about picked Place
+app.get("/places/:id", function(req, res){
+    //find Place within ID 
+    Place.findById(req.params.id, function(err, foundPlace){
+        if(err){
+            console.log("Catch an Error: " + err);
+        } else {
+            //render show template with Place
+            res.render("showInfo", {place: foundPlace});
+        }
+    });
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){
