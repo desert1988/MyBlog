@@ -1,7 +1,8 @@
 const express = require("express"),
       app = express(),
       bodyParser = require("body-parser"),
-      mongoose = require("mongoose");
+      mongoose = require("mongoose"),
+      Place = require("./models/placesSchemas");
 
 //connect withthing mongoose to guide DB(mongoDB)
 mongoose.connect("mongodb://localhost/guide");
@@ -10,7 +11,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 //below is activation of "views" folder  with ".ejs" files inside, so from now you can rendering that files
 app.set("view engine", "ejs"); 
 
-//Schema setup for Mongo
+/*//Schema setup for Mongo 
 let placeSchema = new mongoose.Schema({
     name: String,
     image: String,
@@ -19,7 +20,7 @@ let placeSchema = new mongoose.Schema({
 
 //Model setup for Mongo
 let Place = mongoose.model("Place", placeSchema);
-
+*/
 //Manual place creation (test reasons only)
 /*Place.create({
     name: "Shenzhen", 
@@ -87,6 +88,7 @@ app.get("/places/:id", function(req, res){
     Place.findById(req.params.id, function(err, foundPlace){
         if(err){
             console.log("Catch an Error: " + err);
+            res.redirect("/places");
         } else {
             //render show template with Place
             res.render("showInfo", {place: foundPlace});
