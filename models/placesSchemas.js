@@ -4,7 +4,14 @@ const mongoose = require("mongoose");
 let placeSchema = new mongoose.Schema({
     name: String,
     image: String,
-    description: String
+    description: String,
+    comments: [
+        {
+             type: mongoose.Schema.Types.ObjectId,
+             ref: "Comment"
+        }
+        
+    ]
 });
 
 //Model setup for Mongo
