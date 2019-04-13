@@ -57,7 +57,7 @@ app.get("/places", function(req, res){
             console.log("You are catch an ERROR, lol;)");
             console.log(err);
         } else {
-            res.render("places", {places: allPlaces});
+            res.render("places/places", {places: allPlaces});
         }
     });
    
@@ -85,7 +85,7 @@ app.post("/places", function(req, res){
 });
 
 app.get("/places/new", function(req, res) {
-   res.render("new.ejs"); 
+   res.render("places/new"); 
 });
 
 //SHOWs more information about picked Place
@@ -97,15 +97,53 @@ app.get("/places/:id", function(req, res){
             res.redirect("/places");
         } else {
             //render show template with picked Place
-            res.render("showInfo", {place: foundPlace});
+            res.render("places/showInfo", {place: foundPlace});
         }
     });
 });
 
+//===============COMMENTS 
+
+app.get("/places/:id/comments/new", function(req, res){
+    Place.findById(req.params.id, function(err, foundPlace){
+        if(err){
+            console.log("You catch comment error:" + err);
+        } else {
+            res.render("comments/new", {place: foundPlace});
+        }
+    });
+});
+
+app.post("/places/:id/comments", function(req, res){
+    Place.findById(req.params.id, function(err, foundPlace) {
+       if(err){
+           console.log("Post comment error:"+ err);
+           res.redirect("/places");
+       } else {
+           Comment.create(req.body.comment, function(err, comment){
+               if(err){
+                   console.log(err);
+               } else {
+                   foundPlace.comments.push(comment);
+                   foundPlace.save();
+                   res.redirect("/places/" + foundPlace._id);
+               }
+           });
+       }
+    });
+});
+ 
+ 
+ 
  
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("App is running well!");
 });
+
+
+
+
+
 
 
 

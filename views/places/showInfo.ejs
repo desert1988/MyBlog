@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
 <h1><%= place.name %></h1>
 
 
@@ -7,8 +7,12 @@
 
 <p><%= place.description %></p>
 
+<p>
+    <a class="btn btn-info" href="/places/<%= place._id %>/comments/new">Add new comment</a>
+</p>
+
 <% place.comments.forEach(function(comment){ %>
     <p><strong><%= comment.author %></strong> - <%= comment.text %> </p>
 <% }) %>
 
-<% include partials/footer %>
+<% include ../partials/footer %>
