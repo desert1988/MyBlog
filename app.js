@@ -12,9 +12,14 @@ const express = require("express"),
 //connect withthing mongoose to guide DB(mongoDB)
 mongoose.connect("mongodb://localhost/guide");
 
+
 app.use(bodyParser.urlencoded({extended: true}));
+
 //below is activation of "views" folder  with ".ejs" files inside, so from now you can rendering that files
-app.set("view engine", "ejs"); 
+app.set("view engine", "ejs");
+
+//add public dir to our app
+app.use(express.static(__dirname + "/public"));
 
 floatDB();
 
@@ -134,7 +139,8 @@ app.post("/places/:id/comments", function(req, res){
 });
  
  
- 
+
+//=== Server up checker and PORT/IP setup
  
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("App is running well!");
