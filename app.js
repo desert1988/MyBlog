@@ -23,6 +23,23 @@ app.use(express.static(__dirname + "/public"));
 
 floatDB();
 
+//Authentification Config (passportjs.com)
+app.use(require("express-session")({
+    secret: "Lapa and Me",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalPassport(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+//app can find Auth user
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    next();
+});
 
 /*//Schema setup for Mongo - goes to "models" folder, but keep place for history :)
 let placeSchema = new mongoose.Schema({
@@ -55,6 +72,7 @@ app.get("/", function(req, res){
     
 });
 
+//Show all places
 app.get("/places", function(req, res){
     // Get all Places from Mongo (guide DB)
     Place.find({}, function(err, allPlaces){
@@ -65,10 +83,6 @@ app.get("/places", function(req, res){
             res.render("places/places", {places: allPlaces});
         }
     });
-   
-   
-    //old places Array on server
-    // res.render("places", {places: places});
 });
 
 //Add new Place to DB
@@ -109,7 +123,7 @@ app.get("/places/:id", function(req, res){
 
 //===============COMMENTS 
 
-app.get("/places/:id/comments/new", function(req, res){
+app.get("/places/:id/comments/new", isLoggedIn, function(req, res){
     Place.findById(req.params.id, function(err, foundPlace){
         if(err){
             console.log("You catch comment error:" + err);
@@ -119,7 +133,7 @@ app.get("/places/:id/comments/new", function(req, res){
     });
 });
 
-app.post("/places/:id/comments", function(req, res){
+app.post("/places/:id/comments", isLoggedIn, function(req, res){
     Place.findById(req.params.id, function(err, foundPlace) {
        if(err){
            console.log("Post comment error:"+ err);
@@ -139,6 +153,48 @@ app.post("/places/:id/comments", function(req, res){
 });
  
  
+ 
+//Auth Routes
+//1. Sign Up:
+app.get("/signup", function(req, res) {
+    res.render("signup");
+});
+app.post("/signup", function(req, res) {
+    var newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, function(err, user){
+        if(err){
+            console.log(err);
+            return res.render("signup");
+        }
+        passport.authenticate("local")(req, res, function(){
+            res.redirect("/places");
+        });
+    });
+});
+
+//2. Login:
+app.get("/login", function(req, res){
+    res.render("login");
+});
+app.post("/login", passport.authenticate("local", {
+    successRedirect: "/places",
+    failureRedirect: "/login"
+}), function(req, res) {
+});
+
+//3. Logout:
+app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/places");
+});
+
+//4. Login logic:
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 //=== Server up checker and PORT/IP setup
  
