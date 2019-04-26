@@ -56,6 +56,28 @@ router.get("/:id", function(req, res){
     });
 });
 
+// Places EDIT route
+router.get("/:id/edit", function(req, res) {
+    Place.findById(req.params.id, function(err, selectedPlace){
+        if(err){
+            res.redirect("/places");
+        } else {
+            res.render("places/edit", {place: selectedPlace});
+        }
+    });
+});
+
+router.put("/:id", function(req, res){
+    Place.findByIdAndUpdate(req.params.id, req.body.place, function(err, updatedPlace){
+        if(err){
+            res.redirect("/places");
+        } else {
+            res.redirect("/places/" + req.params.id);
+        }
+    });
+});
+// Place Update route
+
 //middleware Login logic
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){

@@ -4,6 +4,7 @@ const express = require("express"),
       mongoose = require("mongoose"),
       passport = require("passport"),
       LocalPassport = require("passport-local"),
+      mOverride = require("method-override"),
       User = require("./models/user"),
       Comment = require("./models/comment"),
       Place = require("./models/placesSchemas"),
@@ -26,6 +27,9 @@ app.set("view engine", "ejs");
 //add public dir to our app
 app.use(express.static(__dirname + "/public"));
 
+//read method-override doc or man
+app.use(mOverride("_method"));
+
 //tempDB for test reasons
 // floatDB();
 
@@ -47,7 +51,7 @@ app.use(function(req, res, next){
     next();
 });
 
-//Routes config
+//Routes config ("adress", link to file with conf)
 app.use("/places/:id/comments", commentsRoutes);
 app.use("/", indexRoutes);
 app.use("/places", placesRoutes);
