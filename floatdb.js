@@ -25,7 +25,7 @@ let data = [
 function floatDB(){
    //Remove all campgrounds
    Place.remove({}, function(err){
-        if(err){
+       /* if(err){
             console.log(err);
         }
         console.log("removed all Places!");
@@ -58,7 +58,7 @@ function floatDB(){
                     }
                 });
             });
-        });
+        });*/
     }); 
     //add a few comments
 }
