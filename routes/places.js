@@ -16,12 +16,16 @@ router.get("/", function(req, res){
 });
 
 //Add new Place to DB
-router.post("/", function(req, res){
+router.post("/", isLoggedIn, function(req, res){
     // get data and add to places Array
     let name = req.body.name,
         image = req.body.image,
         description = req.body.description,
-        newPlace = {name: name, image: image, description: description};
+        author = {
+            id: req.user._id,
+            username: req.user.username
+        },
+        newPlace = {name: name, image: image, description: description, author: author};
     //Create a new campground and save to guide DB
     Place.create(newPlace, function(err, placeCreated){
         if(err){
@@ -33,7 +37,8 @@ router.post("/", function(req, res){
     });
 });
 
-router.get("/new", function(req, res) {
+//Showing form to create new place
+router.get("/new", isLoggedIn, function(req, res) {
    res.render("places/new"); 
 });
 
@@ -50,5 +55,13 @@ router.get("/:id", function(req, res){
         }
     });
 });
+
+//middleware Login logic
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 module.exports = router;
