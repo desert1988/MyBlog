@@ -6,18 +6,18 @@ const mongoose = require("mongoose"),
  
 let data = [
     {
-        name: "Cloud's Rest", 
-        image: "https://farm4.staticflickr.com/3795/10131087094_c1c0a1c859.jpg",
+        name: "Chernihiv", 
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/%D0%A7%D0%B5%D1%80%D0%BD%D0%B8%D0%B3%D0%BE%D0%B2._%D0%95%D0%BB%D0%B5%D1%86%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80%D1%8C.jpg/800px-%D0%A7%D0%B5%D1%80%D0%BD%D0%B8%D0%B3%D0%BE%D0%B2._%D0%95%D0%BB%D0%B5%D1%86%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80%D1%8C.jpg" ,
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
     },
     {
-        name: "Desert Mesa", 
-        image: "https://farm6.staticflickr.com/5487/11519019346_f66401b6c1.jpg",
+        name: "Bangkok", 
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Klongs.jpg/300px-Klongs.jpg", 
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
     },
     {
-        name: "Canyon Floor", 
-        image: "https://farm1.staticflickr.com/189/493046463_841a18169e.jpg",
+        name: "Shenzhen", 
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Shenzhen_huizhanzhongxin.jpg/220px-Shenzhen_huizhanzhongxin.jpg",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
     }
 ]
