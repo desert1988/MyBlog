@@ -67,6 +67,7 @@ router.get("/:id/edit", function(req, res) {
     });
 });
 
+// Place Update route
 router.put("/:id", function(req, res){
     Place.findByIdAndUpdate(req.params.id, req.body.place, function(err, updatedPlace){
         if(err){
@@ -76,7 +77,17 @@ router.put("/:id", function(req, res){
         }
     });
 });
-// Place Update route
+
+//Remove (DESTROY) Places
+router.delete("/:id", function(req, res){
+    Place.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/places");
+        } else {
+            res.redirect("/places");
+        }
+    });
+});
 
 //middleware Login logic
 function isLoggedIn(req, res, next){
