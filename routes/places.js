@@ -57,18 +57,14 @@ router.get("/:id", function(req, res){
 });
 
 // Places EDIT route
-router.get("/:id/edit", function(req, res) {
+router.get("/:id/edit", checkUser, function(req, res) {
     Place.findById(req.params.id, function(err, selectedPlace){
-        if(err){
-            res.redirect("/places");
-        } else {
-            res.render("places/edit", {place: selectedPlace});
-        }
-    });
+       res.render("places/edit", {place: selectedPlace});
+    }); 
 });
 
 // Place Update route
-router.put("/:id", function(req, res){
+router.put("/:id", checkUser, function(req, res){
     Place.findByIdAndUpdate(req.params.id, req.body.place, function(err, updatedPlace){
         if(err){
             res.redirect("/places");
@@ -79,7 +75,7 @@ router.put("/:id", function(req, res){
 });
 
 //Remove (DESTROY) Places
-router.delete("/:id", function(req, res){
+router.delete("/:id", checkUser, function(req, res){
     Place.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/places");
@@ -95,6 +91,25 @@ function isLoggedIn(req, res, next){
         return next();
     }
     res.redirect("/login");
+}
+
+//check is User/author logged in
+function checkUser(req, res, next){
+    if(req.isAuthenticated()){
+        Place.findById(req.params.id, function(err, selectedPlace) {
+            if(err){
+                res.redirect("back");
+            } else {
+                if(selectedPlace.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    res.send("back");
+                }
+            }
+        });
+    } else {
+        res.send("back");
+    }
 }
 
 module.exports = router;

@@ -30,7 +30,7 @@ app.use(express.static(__dirname + "/public"));
 //read method-override doc or man
 app.use(mOverride("_method"));
 
-//tempDB for test reasons
+//tempDB for test reasons and clean all DB data
 // floatDB();
 
 //Authentification Config (passportjs.com)

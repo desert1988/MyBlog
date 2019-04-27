@@ -19,10 +19,12 @@
                     <p> 
                     <em>Added by <%= place.author.username %>.</em>
                     </p>
-                    <a class="btn btn-xs btn-default" href="/places/<%= place._id %>/edit">Edit Place</a>
+                    <% if(currentUser && place.author.id.equals(currentUser._id)){ %>
+                        <a class="btn btn-xs btn-default" href="/places/<%= place._id %>/edit">Edit Place</a>
                     <form id="delete-form" action="/places/<%= place._id %>?_method=DELETE" method="POST">
                         <button class="btn btn-xs btn-danger">Delete Place</button>
                     </form>
+                    <% } %>
                 </div>
             </div>
             <div class="well">
