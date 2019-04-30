@@ -65,6 +65,7 @@ router.get("/:id/edit", checkUser, function(req, res) {
 
 // Place Update route
 router.put("/:id", checkUser, function(req, res){
+    //*.findByIdAndUpdate(id defined by, updated it with, callback to run afterwards)
     Place.findByIdAndUpdate(req.params.id, req.body.place, function(err, updatedPlace){
         if(err){
             res.redirect("/places");
@@ -93,7 +94,7 @@ function isLoggedIn(req, res, next){
     res.redirect("/login");
 }
 
-//check is User/author logged in
+//check is User/author who create Place logged in
 function checkUser(req, res, next){
     if(req.isAuthenticated()){
         Place.findById(req.params.id, function(err, selectedPlace) {
@@ -103,12 +104,12 @@ function checkUser(req, res, next){
                 if(selectedPlace.author.id.equals(req.user._id)){
                     next();
                 } else {
-                    res.send("back");
+                    res.redirect("back");
                 }
             }
         });
     } else {
-        res.send("back");
+        res.redirect("back");
     }
 }
 

@@ -40,12 +40,68 @@ router.post("/", isLoggedIn, function(req, res){
     });
 });
 
+//add comments edit functionality
+router.get("/:comment_id/edit", checkCommenter, function(req, res){
+    Comment.findById(req.params.comment_id, function(err, foundComment){
+        if(err){
+            res.redirect("back");
+        } else {
+            res.render("./comments/edit", {place_id: req.params.id, comment: foundComment});
+        }
+    });
+    
+});
+
+//update comments route
+router.put("/:comment_id", checkCommenter, function(req, res){
+   //*.findByIdAndUpdate(id defined by, updated it with, callback to run afterwards)
+   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
+       if(err){
+           res.redirect("back");
+       } else {
+           res.redirect("/places/" + req.params.id );
+       }
+    }); 
+}); 
+
+//remove comments route
+router.delete("/:comment_id", checkCommenter, function(req, res){
+    //findByIdAndRemove
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
+        if(err){
+            res.redirect("back");
+        } else {
+            res.redirect("/places/" + req.params.id);
+        }
+    });
+    
+});
+
 //middleware Login logic
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
     res.redirect("/login");
+}
+
+//check is User/author who create Comment logged in
+function checkCommenter(req, res, next){
+    if(req.isAuthenticated()){
+        Comment.findById(req.params.comment_id, function(err, selectedComment) {
+            if(err){
+                res.redirect("back");
+            } else {
+                if(selectedComment.author.id.equals(req.user._id)){
+                    next();
+                } else {
+                    res.redirect("back");
+                }
+            }
+        });
+    } else {
+        res.redirect("back");
+    }
 }
 
 

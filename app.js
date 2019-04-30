@@ -45,7 +45,7 @@ passport.use(new LocalPassport(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//App detect Auth user
+//App detect Auth user - currentUser
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
     next();

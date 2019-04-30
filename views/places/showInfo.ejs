@@ -19,9 +19,10 @@
                     <p> 
                     <em>Added by <%= place.author.username %>.</em>
                     </p>
+                    <!--Line under(with ejs code) shows edit and delete btns for user who create Place; currentUser - setup in app.js -->
                     <% if(currentUser && place.author.id.equals(currentUser._id)){ %>
                         <a class="btn btn-xs btn-default" href="/places/<%= place._id %>/edit">Edit Place</a>
-                    <form id="delete-form" action="/places/<%= place._id %>?_method=DELETE" method="POST">
+                    <form class="delete-form" action="/places/<%= place._id %>?_method=DELETE" method="POST">
                         <button class="btn btn-xs btn-danger">Delete Place</button>
                     </form>
                     <% } %>
@@ -40,6 +41,16 @@
                             <p>
                                 <%= comment.text %> 
                             </p>
+                        <!-- <!--Line under(with ejs code) shows edit and delete btns for user who create comment -->    
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                            <!--Edit comments btn with ejs code in address-->
+                            <a class="btn btn-xs btn-default" href="/places/<%=place._id %>/comments/<%=comment._id %>/edit">Edit</a>
+                            <!--Remove comments btn in a <form>-->
+                            <form class="delete-form" action="/places/<%=place._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                                <!--button via input tag-->
+                                <input type="submit" class="btn btn-xs btn-default" value="Delete">
+                            </form>
+                        <% } %>
                         </div>
                     </div>
                 <% }) %>
