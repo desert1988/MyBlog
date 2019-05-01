@@ -24,6 +24,7 @@ router.post("/", isLoggedIn, function(req, res){
        } else {
            Comment.create(req.body.comment, function(err, comment){
                if(err){
+                   req.flash("error", "Something went wrong");
                    console.log(err);
                } else {
                    //add user to comment
@@ -33,6 +34,7 @@ router.post("/", isLoggedIn, function(req, res){
                    comment.save();
                    foundPlace.comments.push(comment);
                    foundPlace.save();
+                   req.flash("success", "Successfully added new comment!");
                    res.redirect("/places/" + foundPlace._id);
                }
            });
@@ -59,6 +61,7 @@ router.put("/:comment_id", checkCommenter, function(req, res){
        if(err){
            res.redirect("back");
        } else {
+           req.flash("success", "Successfully edited comment!");
            res.redirect("/places/" + req.params.id );
        }
     }); 
@@ -82,6 +85,7 @@ function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
+    req.flash("error", "Please Login!");
     res.redirect("/login");
 }
 
@@ -100,6 +104,7 @@ function checkCommenter(req, res, next){
             }
         });
     } else {
+        req.flash("error", "Please login!");
         res.redirect("back");
     }
 }

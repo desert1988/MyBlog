@@ -20,10 +20,11 @@ router.post("/signup", function(req, res) {
     var newUser = new User({username: req.body.username});
     User.register(newUser, req.body.password, function(err, user){
         if(err){
-            console.log(err);
+            req.flash("error", "This name already taken. Please try another.");
             return res.render("signup");
         }
         passport.authenticate("local")(req, res, function(){
+            req.flash("success", "Welcome to Guide in Journeys!");
             res.redirect("/places");
         });
     });
@@ -33,6 +34,7 @@ router.post("/signup", function(req, res) {
 router.get("/login", function(req, res){
     res.render("login");
 });
+//Login logic
 router.post("/login", passport.authenticate("local", {
     successRedirect: "/places",
     failureRedirect: "/login"
@@ -42,15 +44,18 @@ router.post("/login", passport.authenticate("local", {
 //3. Logout:
 router.get("/logout", function(req, res) {
     req.logout();
+    req.flash("success", "Successfully Logged out!");
     res.redirect("/places");
 });
 
-//4. Midleware Login logic:
+//4. Midleware:
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
+    req.flash("error", "Please Login!");
     res.redirect("/login");
 }
+
 
 module.exports = router;

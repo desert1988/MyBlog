@@ -31,6 +31,7 @@ router.post("/", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
+            req.flash("success", "Place successfully added!");
             //redirect to places page
             res.redirect("/places");
         }
@@ -81,6 +82,7 @@ router.delete("/:id", checkUser, function(req, res){
         if(err){
             res.redirect("/places");
         } else {
+            req.flash("success", "Place successfully removed!");
             res.redirect("/places");
         }
     });
@@ -91,6 +93,7 @@ function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
+    req.flash("error", "Please Login!");
     res.redirect("/login");
 }
 
@@ -99,16 +102,19 @@ function checkUser(req, res, next){
     if(req.isAuthenticated()){
         Place.findById(req.params.id, function(err, selectedPlace) {
             if(err){
+                req.flash("error", "Place not found!");
                 res.redirect("back");
             } else {
                 if(selectedPlace.author.id.equals(req.user._id)){
                     next();
                 } else {
+                    req.flash("error", "Permission denied!");
                     res.redirect("back");
                 }
             }
         });
     } else {
+        
         res.redirect("back");
     }
 }
