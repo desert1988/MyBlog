@@ -19,13 +19,14 @@ router.get("/", function(req, res){
 router.post("/", isLoggedIn, function(req, res){
     // get data and add to places Array
     let name = req.body.name,
+        price = req.body.price,
         image = req.body.image,
         description = req.body.description,
-        author = {
+        author = {  
             id: req.user._id,
             username: req.user.username
         },
-        newPlace = {name: name, image: image, description: description, author: author};
+        newPlace = {name: name, price: price, image: image, description: description, author: author};
     //Create a new campground and save to guide DB
     Place.create(newPlace, function(err, placeCreated){
         if(err){
