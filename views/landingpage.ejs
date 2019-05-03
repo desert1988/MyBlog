@@ -1,9 +1,41 @@
-<% include ./partials/header %>
-<h1>Welcome to our travels!=)</h1>
+<html>
+    <head>
+        <title>Guide in Journeys</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./stylesheets/landingpage.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+    </head>
+    <body>
+    
+    <div class="container">
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+    </div>
+    
+    <div id="landing-header">
+ 		<h1>Welcome to Guide In Journeys!</h1>
+ 		<a href="/places" class="btn btn-lg btn-success">Cool Places are waiting YOU!</a>
+    </div>
+    
+    <ul class="slideshow">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
 
-
-<p> Start from here</p>
-
-<a href="/places">View all places!</a>
-
-<% include ./partials/footer %>
+    <footer class="footer">
+        <p class="copyright">Time stops while you travel. Guide in Journeys 2018(©)</p>
+    </footer>
+    
+    </body>
+</html>
