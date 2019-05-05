@@ -2,20 +2,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <p class="lead">Guide advices</p>
+            <p class="lead">Guide advices:</p>
             <div class="list-group">
-                <li class="list-group-item active">Info 1</li>
-                <li class="list-group-item">Info 2</li>
-                <li class="list-group-item">Info 3</li>
+                <li class="list-group-item active">Local guide tour</li>
+                <li class="list-group-item">Evening(Night) tour</li>
+                <li class="list-group-item">Kids tour</li>
             </div>
         </div>
         <div class="col-md-9">
             <div class="thumbnail">
                 <img class="img-responsive" src="<%= place.image %>">
                 <div class="caption-full">
-                    <h4 class="pull-right">$<%= place.price %></h4>
+                    <h4 class="pull-right">$<%= place.price %>/tour</h4>
                     <h3><a><%= place.name %></a></h3>
-                    <p><%= place.description %></p>
+                    <p class="textify"><%= place.description %></p>
                     <p> 
                     <em>Added by <%= place.author.username %>.</em>
                     </p>

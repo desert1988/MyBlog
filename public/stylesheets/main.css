@@ -31,3 +31,8 @@
         text-align: center;
         bottom:0;
 }
+
+.textify {
+    text-align: justify;
+    text-justify: inter-word;
+}
