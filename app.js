@@ -15,9 +15,13 @@ const express = require("express"),
 const commentsRoutes = require("./routes/comments"),
       indexRoutes = require("./routes/index"),
       placesRoutes = require("./routes/places");
-      
+
+//dotenv setup
+require('dotenv').config();
+
 //connect withthing mongoose to guide DB(mongoDB)
-mongoose.connect("mongodb://localhost/guide");
+//mongoose.connect("mongodb://localhost/guide");
+mongoose.connect("mongodb+srv://desert:passWordMongo@cluster0-oul8i.mongodb.net/test?retryWrites=true");
 
 //body parser conf read in man
 app.use(bodyParser.urlencoded({extended: true}));
