@@ -11,17 +11,16 @@ const express = require("express"),
       Place = require("./models/placesSchemas"),
       floatDB = require("./floatdb");
 
+//dotenv setup
+require('dotenv').config();
 // Routes map     
 const commentsRoutes = require("./routes/comments"),
       indexRoutes = require("./routes/index"),
       placesRoutes = require("./routes/places");
 
-//dotenv setup
-require('dotenv').config();
-
 //connect withthing mongoose to guide DB(mongoDB)
 //mongoose.connect("mongodb://localhost/guide");
-mongoose.connect("mongodb+srv://desert:passWordMongo@cluster0-oul8i.mongodb.net/test?retryWrites=true");
+mongoose.connect("mongodb+srv://desert:PASS_MONGO@cluster0-oul8i.mongodb.net/test?retryWrites=true");
 
 //body parser conf read in man
 app.use(bodyParser.urlencoded({extended: true}));
