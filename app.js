@@ -20,7 +20,7 @@ const commentsRoutes = require("./routes/comments"),
 
 //connect withthing mongoose to guide DB(mongoDB)
 //mongoose.connect("mongodb://localhost/guide");
-mongoose.connect("mongodb+srv://desert:PASS_MONGO@cluster0-oul8i.mongodb.net/test?retryWrites=true");
+mongoose.connect("mongodb+srv://desert:"+ process.env.PASS_MONGO + "@cluster0-oul8i.mongodb.net/test?retryWrites=true", { useNewUrlParser: true });
 
 //body parser conf read in man
 app.use(bodyParser.urlencoded({extended: true}));
